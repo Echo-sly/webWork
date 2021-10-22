@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>biaoge</title>
+</head>
+<body topmargin="0">
+<table border="1" bordercolor="#ff0" width="600" height="300" cellspacing="0" cellpadding="10">
+    <tr align="center">
+        <td colspan="2">1因为合并了，所以就不能添加多余的标签了。否则会被当成新添加的标签。</td>
+        <td>2如：一行两列的合并两个，却依然在后面追加td的话，就会多出一列变成三列。</td>
+        <!-- <td>3</td> -->
+    </tr>
+    <tr align="center">
+        <td>1</td>
+        <td>2</td>
+        <td rowspan="2">3这里与下边合并了，所以下边就不用添加td了。</td>
+    </tr>
+    <tr align="center">
+        <td>1</td>
+        <td>2</td>
+        <td>3<br>如果添加，就会像这样被挤出来。上面的其实也是同样的道理。</td>
+    </tr>
+    <tr align="center" height="100">
+        <td valign="top">1垂直向上</td>
+        <td valign="middle">2垂直居中</td>
+        <td valign="bottom">3垂直向下</td>
+    </tr>
+</table>
