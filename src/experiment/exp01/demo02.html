@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="">
+<!--前六个数是普通号码-->
+<!--最后一个数是特别号码-->
+<!--采用福彩双色球玩法-->
+<!--普通号码从1到33-->
+<!--特别号码从1到16-->
+<head>
+    <meta charset="UTF-8">
+    <title> 双色球投注彩票助手 </title>
+    <style type="text/css">
+        div {
+            width: 550px;
+            height: 320px;
+            margin: 0 auto;
+            border: 2px solid #0077BB;
+            color: #000000;
+        }
+
+        h2 {
+            font-size: 28px;
+            text-align: center;
+            padding: 10px auto;
+        }
+
+        select {
+            width: 300px;
+            height: 145px;
+        }
+
+        input {
+            width: 80px;
+            height: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+        function selectNumber(n) {
+            //彩票选号助手
+            const number = [];
+            const objsel = $("number8");
+            const selnum = objsel.options.length;//保存选项添加前总数
+            for (j = 0; j <= n - 1; j++) {
+                let list = "";
+                for (i = 0; i < 7; i++)    //产生1注号码
+                {
+                    var tmp = Math.floor(Math.random() * 33 + 1);
+                    if (tmp < 10) {
+                        tmp = "0" + tmp;
+                    }
+                    for (let k = 0; k <= number.length - 1; k++) {
+                        if (tmp == number[k]) { //重号处理
+                            tmp = Math.floor(Math.random() * 33 + 1);
+                            if (tmp < 10) {
+                                tmp = "0" + tmp;
+                            }
+                            k = 0;
+                        }
+                    }
+                    number[i] = tmp;
+                    number.sort();
+                    if (i == 6) {
+                        var tmp = Math.floor(Math.random() * 16 + 1);
+                        if (tmp < 10) {
+                            tmp = "0" + tmp;
+                        }
+                        number[i] = tmp;
+                    }
+                }
+                list = number.join("  ");  //1 注彩票号码
+                //写入到列表框中
+                const opt = document.createElement("option");//产生选项节点
+                const opt_text = document.createTextNode(list);//产生文本节点
+                opt.value = j;   //记下添加列表项的个数
+                opt.appendChild(opt_text);//将文本添加给选项
+                objsel.appendChild(opt);//将选项添加给列表框
+            }
+            //始终将新添加的第一个列表项作为预选项
+            objsel.selectedIndex = selnum;
+        }
+
+        function delSelect() {
+            const objSelect = $("number8");
+            const strIndex = objSelect.selectedIndex;
+            if (strIndex != -1) {
+                objSelect.options.remove(strIndex);
+            } else {
+                alert("请先选择列表项后再删除！");
+            }
+        }
+
+        function delSelectAll() {
+            const objSelect = $("number8");
+            const strIndex = objSelect.options.length;
+            if (strIndex > 0) {
+                for (i = 0; i <= strIndex - 1; i++) {
+                    objSelect.options.remove(0);
+                }
+            } else {
+                alert("请先选择列表项后再删除！");
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="" id="">
+    <img alt="" border="0" height="72" src="img/福彩.jpg" width="76">
+    <form action="" method="post">
+        <table align="center">
+            <tr>
+                <td><input onclick="selectNumber(1);" type="button" value="机选1注"></td>
+                <td rowspan="3">
+                    <label for="number8"></label><select id="number8" name="number8" size="5">
+                </select>
+                </td>
+                <td><input onclick="delSelect();" type="button" value="删除"></td>
+            </tr>
+            <tr>
+                <td><input onclick="selectNumber(5);" type="button" value="机选5注"></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><input onclick="selectNumber(10);" type="button" value="机选10注"></td>
+                <td><input onclick="delSelectAll();" type="button" value="全部删除"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
